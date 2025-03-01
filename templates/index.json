@@ -318,6 +318,7 @@
         "image_GRkdEa": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/BENEFITS_2_1.png",
             "alt_text": "Image"
           }
         },
