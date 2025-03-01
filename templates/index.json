@@ -311,19 +311,14 @@
             "paragraph_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "heading_2": "Heading 2",
             "paragraph_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "heading_3": "Heading 3",
-            "paragraph_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            "heading_3": "",
+            "paragraph_3": ""
           }
         },
-        "video_CB9CMa": {
-          "type": "video",
+        "image_GRkdEa": {
+          "type": "image",
           "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4",
-            "autoplay": true,
-            "mute": true,
-            "controls": true,
-            "loop": true,
-            "ratio": "4/3"
+            "alt_text": "Image"
           }
         },
         "content_Dry8MQ": {
@@ -333,18 +328,18 @@
             "paragraph_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "heading_2": "Heading 2",
             "paragraph_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "heading_3": "Heading 3",
-            "paragraph_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            "heading_3": "",
+            "paragraph_3": ""
           }
         }
       },
       "block_order": [
         "content_BQp9hQ",
-        "video_CB9CMa",
+        "image_GRkdEa",
         "content_Dry8MQ"
       ],
       "settings": {
-        "background_color": "#f0f0f0",
+        "background_color": "#ffffff",
         "page_width": 1200,
         "heading_color": "#000000",
         "text_color": "#333333"
