@@ -2,20 +2,19 @@
   assign unique_id = section.id | append: '-' | append: 'now' | date: '%N'
 -%}
 {%- style -%}
-  #custom-flex-section-{{ section.id }}.custom-flex-section,
-  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--background-1 {
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="background-1"] {
     background-color: rgb(var(--color-background-1));
     color: rgb(var(--color-text));
   }
-  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--background-2 {
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="background-2"] {
     background-color: rgb(var(--color-background-2));
     color: rgb(var(--color-text));
   }
-  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--accent-1 {
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="accent-1"] {
     background-color: rgb(var(--color-accent-1));
     color: rgb(var(--color-text));
   }
-  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--inverse {
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="inverse"] {
     background-color: rgb(var(--color-base-inverse));
     color: rgb(var(--color-background-1));
   }
@@ -26,7 +25,7 @@
     justify-content: center;
     padding: 20px;
     gap: 20px;
-    max-width: 1200px;
+    max-width: {{ section.settings.container_width }}px;
     margin: auto;
   }
   .feature-content {
@@ -74,8 +73,8 @@
 
 <div
   id="custom-flex-section-{{ section.id }}"
-  class="custom-flex-section color-scheme--{{ section.settings.color_scheme }}"
-  data-unique-id="{{ unique_id }}"
+  class="custom-flex-section"
+  data-color-scheme="{{ section.settings.color_scheme }}"
 >
   {% for block in section.blocks %}
     {% case block.type %}
@@ -154,6 +153,16 @@
 {
   "name": "Custom Flex Section",
   "settings": [
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container Width (px)",
+      "min": 600,
+      "max": 2000,
+      "step": 20,
+      "default": 1200,
+      "unit": "px"
+    },
     {
       "type": "select",
       "id": "color_scheme",
