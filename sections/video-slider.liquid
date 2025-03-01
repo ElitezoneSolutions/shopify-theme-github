@@ -149,8 +149,8 @@
                 </video>
               {% else %}
                 <div class="video-placeholder" style="color:#fff; text-align:center;">
-                  {% if block.settings.thumbnail != blank %}
-                    <img src="{{ block.settings.thumbnail | image_url: width: 1200 }}" alt="{{ block.settings.title }}">
+                    {% if block.settings.thumbnail != blank %}
+                    <img src="{{ block.settings.thumbnail | image_url: width: 600 }}" alt="{{ block.settings.title }}" width="600" height="auto">
                   {% else %}
                     <span>No video available</span>
                   {% endif %}
