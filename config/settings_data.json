@@ -11,8 +11,7 @@
   "current": {
     "logo_width": 90,
     "extended-megamenu-show-imgs": "yes",
-    "extended-megamenu-featured-img": "shopify://shop_images/BENEFITS_2_1.png",
-    "extended-megamenu-show-featured": "no",
+    "extended-megamenu-show-featured": "yes",
     "type_header_font": "inter_n7",
     "heading_scale": 100,
     "type_body_font": "inter_n4",
