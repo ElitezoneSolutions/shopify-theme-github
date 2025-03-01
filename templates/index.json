@@ -222,29 +222,7 @@
         "container_gap": 60,
         "section_color_scheme": "scheme-4",
         "padding_top": 60,
-        "padding_bottom": 32
-      }
-    },
-    "wave_UeNcPN": {
-      "type": "wave",
-      "settings": {
-        "wave_height": 100,
-        "wave_height_mobile": 60,
-        "wave_animation": true,
-        "wave_rotate": true,
-        "wave_color": "#121212",
-        "background_color": "#ffffff",
-        "background_gradient": "",
-        "border_color": "#000000",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "padding_horizontal": 0,
-        "padding_horizontal_mobile": 0,
-        "full_width": true,
-        "content_width": 120,
-        "border_thickness": 0
+        "padding_bottom": 0
       }
     },
     "featured_review_slider_pLTA3J": {
@@ -290,6 +268,28 @@
         "border_radius": 6,
         "font_size": 16,
         "custom_classes": "quote-slider"
+      }
+    },
+    "wave_UeNcPN": {
+      "type": "wave",
+      "settings": {
+        "wave_height": 100,
+        "wave_height_mobile": 60,
+        "wave_animation": true,
+        "wave_rotate": true,
+        "wave_color": "#121212",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0
       }
     },
     "custom_liquid_XP7mgL": {
@@ -351,8 +351,8 @@
     "featured_product_nHNjQ9",
     "video_slider_H4y8h9",
     "video_with_text_96EMJm",
-    "wave_UeNcPN",
     "featured_review_slider_pLTA3J",
+    "wave_UeNcPN",
     "custom_liquid_XP7mgL",
     "custom_feature_section_G4hFzw"
   ]
