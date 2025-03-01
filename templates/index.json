@@ -103,63 +103,23 @@
       "blocks": {
         "video_Mzff8U": {
           "type": "video",
-          "settings": {
-            "video_url": "",
-            "autoplay": false,
-            "loop": false,
-            "muted": false,
-            "controls": true,
-            "video_ratio": "16:9",
-            "video_aria_label": ""
-          }
+          "settings": {}
         },
         "video_bh8aq6": {
           "type": "video",
-          "settings": {
-            "video_url": "",
-            "autoplay": false,
-            "loop": false,
-            "muted": false,
-            "controls": true,
-            "video_ratio": "16:9",
-            "video_aria_label": ""
-          }
+          "settings": {}
         },
         "video_jqcTqa": {
           "type": "video",
-          "settings": {
-            "video_url": "",
-            "autoplay": false,
-            "loop": false,
-            "muted": false,
-            "controls": true,
-            "video_ratio": "16:9",
-            "video_aria_label": ""
-          }
+          "settings": {}
         },
         "video_DMaMeG": {
           "type": "video",
-          "settings": {
-            "video_url": "",
-            "autoplay": false,
-            "loop": false,
-            "muted": false,
-            "controls": true,
-            "video_ratio": "16:9",
-            "video_aria_label": ""
-          }
+          "settings": {}
         },
         "video_VbmWTK": {
           "type": "video",
-          "settings": {
-            "video_url": "",
-            "autoplay": false,
-            "loop": false,
-            "muted": false,
-            "controls": true,
-            "video_ratio": "16:9",
-            "video_aria_label": ""
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -318,7 +278,7 @@
             "loop": true,
             "muted": true,
             "controls": false,
-            "video_ratio": "21:9"
+            "video_ratio": "1:1"
           }
         },
         "content_QztrBH": {
