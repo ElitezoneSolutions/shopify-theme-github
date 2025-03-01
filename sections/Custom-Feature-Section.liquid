@@ -4,7 +4,7 @@
   - It includes three block types:
       1. Content Block (three heading and paragraph pairs)
       2. Image Block (image picker)
-      3. Video Block (video URL with mute, autoplay, loop, controls, and ratio options)
+      3. Video Block (video URL with options: mute, autoplay, loop, controls, and a ratio selector)
   - A section setting allows you to choose a color scheme.
 {% endcomment %}
 
@@ -53,7 +53,6 @@
   .video-block video {
       width: 100%;
       max-width: 400px;
-      /* The aspect-ratio property helps maintain the container ratio */
       object-fit: cover;
   }
   /* Aspect ratio classes */
