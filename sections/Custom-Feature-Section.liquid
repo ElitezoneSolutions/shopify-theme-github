@@ -76,3 +76,75 @@
   ]
 }
 {% endschema %}
+
+<style>
+  .feature-style-container {
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    background-color: {{ section.settings.background_color }};
+    max-width: {{ section.settings.page_width }}px;
+    margin: auto;
+  }
+
+  .feature-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .content h3 {
+    color: {{ section.settings.heading_color }};
+  }
+
+  .content p {
+    color: {{ section.settings.text_color }};
+  }
+
+  .image-block {
+    flex: 1;
+    text-align: center;
+    min-width: 300px;
+  }
+
+  .image-block img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  @media (max-width: 767px) {
+    .feature-content {
+      flex-direction: column;
+    }
+
+    .content {
+      padding: 10px;
+    }
+  }
+</style>
+
+<div class="feature-style-container">
+  <div class="feature-content">
+    {% for block in section.blocks %}
+      {% if block.type == 'content' %}
+        <div class="content">
+          <h3>{{ block.settings.heading }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {% elsif block.type == 'image' %}
+        <div class="image-block">
+          <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text }}">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
