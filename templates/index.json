@@ -307,8 +307,12 @@
         "content_e7fy3L": {
           "type": "content",
           "settings": {
-            "heading": "Heading",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            "heading_1": "Heading 1",
+            "paragraph_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "heading_2": "Heading 2",
+            "paragraph_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "heading_3": "",
+            "paragraph_3": ""
           }
         },
         "image_xaRiky": {
@@ -321,8 +325,12 @@
         "content_eYmVwT": {
           "type": "content",
           "settings": {
-            "heading": "Heading",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            "heading_1": "Heading 1",
+            "paragraph_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "heading_2": "Heading 2",
+            "paragraph_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "heading_3": "",
+            "paragraph_3": ""
           }
         }
       },
