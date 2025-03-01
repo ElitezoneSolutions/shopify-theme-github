@@ -1,16 +1,4 @@
-{% comment %}
-  Custom Flex Section using Shopify dynamic color variables.
-  This section includes three block types:
-    • Content Block (with up to three sets of heading & paragraph)
-    • Image Block (image picker)
-    • Video Block (with URL, autoplay, loop, muted, controls, and a selectable video ratio)
-
-  The CSS uses Shopify’s native dynamic color variables (e.g. rgb(var(--color-background)) and rgb(var(--color-text))).
-  Adjust the variable names if your theme uses different ones.
-{% endcomment %}
-
 <style>
-  /* Section styling using Shopify dynamic color variables */
   .custom-flex-section {
     display: flex;
     flex-wrap: wrap;
@@ -50,6 +38,20 @@
     max-width: 400px;
     object-fit: cover;
   }
+  .video-ratio-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+  }
+  .video-ratio-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   @media (max-width: 767px) {
     .custom-flex-section .feature-content {
       flex-direction: row;
@@ -85,33 +87,47 @@
         </div>
       {% when 'image' %}
         <div class="image-container">
-          {% if block.settings.image != blank -%}
-            <img src="{{ block.settings.image | img_url: '600x400' }}" alt="Image">
-          {%- endif %}
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text | escape }}">
+          {% endif %}
         </div>
       {% when 'video' %}
         {% assign ratio = block.settings.video_ratio | default: '16:9' %}
-        <div class="video-container" style="aspect-ratio: {{ ratio | replace: ':', '/' }};">
-          {% assign video_url = block.settings.video_url
-            | default: 'https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4'
-          %}
-          <video
-            {% if block.settings.autoplay %}
-              autoplay
-            {% endif %}
-            {% if block.settings.loop %}
-              loop
-            {% endif %}
-            {% if block.settings.muted %}
-              muted
-            {% endif %}
-            {% if block.settings.controls %}
-              controls
-            {% endif %}
-          >
-            <source src="{{ video_url }}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+        {% if ratio == '16:9' %}
+          {% assign ratio_percent = '56.25' %}
+        {% elsif ratio == '4:3' %}
+          {% assign ratio_percent = '75' %}
+        {% elsif ratio == '1:1' %}
+          {% assign ratio_percent = '100' %}
+        {% elsif ratio == '21:9' %}
+          {% assign ratio_percent = '42.86' %}
+        {% else %}
+          {% assign ratio_percent = '56.25' %}
+        {% endif %}
+        <div class="video-container">
+          <div class="video-ratio-wrapper" style="padding-bottom: {{ ratio_percent }}%;">
+            {% assign video_url = block.settings.video_url
+              | default: 'https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4'
+            %}
+            <video
+              aria-label="{{ block.settings.video_aria_label | escape }}"
+              {% if block.settings.autoplay %}
+                autoplay
+              {% endif %}
+              {% if block.settings.loop %}
+                loop
+              {% endif %}
+              {% if block.settings.muted %}
+                muted
+              {% endif %}
+              {% if block.settings.controls %}
+                controls
+              {% endif %}
+            >
+              <source src="{{ video_url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
     {% endcase %}
   {% endfor %}
@@ -138,7 +154,8 @@
       "type": "image",
       "name": "Image Block",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" }
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt_text", "label": "Image Alt Text" }
       ]
     },
     {
@@ -161,7 +178,8 @@
             { "value": "21:9", "label": "21:9" }
           ],
           "default": "16:9"
-        }
+        },
+        { "type": "text", "id": "video_aria_label", "label": "Video ARIA Label" }
       ]
     }
   ],
