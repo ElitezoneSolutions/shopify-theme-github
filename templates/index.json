@@ -325,14 +325,15 @@
             "paragraph3": ""
           }
         },
-        "video_eKYCfq": {
+        "video_iQH8BQ": {
           "type": "video",
           "settings": {
             "video_url": "",
             "mute": true,
             "autoplay": true,
             "loop": true,
-            "controls": false
+            "controls": true,
+            "video_ratio": "21:9"
           }
         },
         "content_QztrBH": {
@@ -349,7 +350,7 @@
       },
       "block_order": [
         "content_iLxDaH",
-        "video_eKYCfq",
+        "video_iQH8BQ",
         "content_QztrBH"
       ],
       "settings": {
