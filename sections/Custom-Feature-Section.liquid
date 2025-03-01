@@ -1,21 +1,4 @@
 <style>
-  #custom-flex-section-{{ section.id }}.custom-flex-section,
-  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="background-1"] {
-    background-color: rgb(var(--color-background-1));
-    color: rgb(var(--color-text));
-  }
-  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="background-2"] {
-    background-color: rgb(var(--color-background-2));
-    color: rgb(var(--color-text));
-  }
-  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="accent-1"] {
-    background-color: rgb(var(--color-accent-1));
-    color: rgb(var(--color-text));
-  }
-  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="inverse"] {
-    background-color: rgb(var(--color-base-inverse));
-    color: rgb(var(--color-background-1));
-  }
   .custom-flex-section {
     display: flex;
     flex-wrap: wrap;
@@ -26,25 +9,41 @@
     max-width: 1200px;
     margin: auto;
   }
-  .custom-flex-section .feature-content {
+  .custom-flex-section.color-scheme--background-1 {
+    background-color: rgb(var(--color-background-1));
+    color: rgb(var(--color-text));
+  }
+  .custom-flex-section.color-scheme--background-2 {
+    background-color: rgb(var(--color-background-2));
+    color: rgb(var(--color-text));
+  }
+  .custom-flex-section.color-scheme--accent-1 {
+    background-color: rgb(var(--color-accent-1));
+    color: rgb(var(--color-text));
+  }
+  .custom-flex-section.color-scheme--inverse {
+    background-color: rgb(var(--color-base-inverse));
+    color: rgb(var(--color-background-1));
+  }
+  .feature-content {
     flex: 1;
     min-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
-  .custom-flex-section .content {
+  .content {
     text-align: center;
   }
-  .custom-flex-section .image-container {
+  .image-container {
     text-align: center;
     min-width: 300px;
   }
-  .custom-flex-section .image-container img {
+  .image-container img {
     width: 100%;
     max-width: 400px;
   }
-  .custom-flex-section .video-container {
+  .video-container {
     text-align: center;
     min-width: 300px;
   }
@@ -63,7 +62,7 @@
     object-fit: cover;
   }
   @media (max-width: 767px) {
-    .custom-flex-section .feature-content {
+    .feature-content {
       flex-direction: row;
     }
   }
@@ -71,8 +70,7 @@
 
 <div
   id="custom-flex-section-{{ section.id }}"
-  class="custom-flex-section"
-  data-color-scheme="{{ section.settings.color_scheme }}"
+  class="custom-flex-section color-scheme--{{ section.settings.color_scheme }}"
 >
   {% for block in section.blocks %}
     {% case block.type %}
@@ -101,23 +99,23 @@
         </div>
       {% when 'image' %}
         <div class="image-container">
-          {% if block.settings.image != blank -%}
+          {% if block.settings.image != blank %}
             <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text | escape }}">
-          {%- endif %}
+          {% endif %}
         </div>
       {% when 'video' %}
         {% assign ratio = block.settings.video_ratio | default: '16:9' %}
-        {% if ratio == '16:9' -%}
-          {%- assign ratio_percent = '56.25' -%}
-        {%- elsif ratio == '4:3' -%}
-          {%- assign ratio_percent = '75' -%}
-        {%- elsif ratio == '1:1' -%}
-          {%- assign ratio_percent = '100' -%}
-        {%- elsif ratio == '21:9' -%}
-          {%- assign ratio_percent = '42.86' -%}
-        {%- else -%}
-          {%- assign ratio_percent = '56.25' -%}
-        {%- endif %}
+        {% if ratio == '16:9' %}
+          {% assign ratio_percent = '56.25' %}
+        {% elsif ratio == '4:3' %}
+          {% assign ratio_percent = '75' %}
+        {% elsif ratio == '1:1' %}
+          {% assign ratio_percent = '100' %}
+        {% elsif ratio == '21:9' %}
+          {% assign ratio_percent = '42.86' %}
+        {% else %}
+          {% assign ratio_percent = '56.25' %}
+        {% endif %}
         <div class="video-container">
           <div class="video-ratio-wrapper" style="padding-bottom: {{ ratio_percent }}%;">
             {% assign video_url = block.settings.video_url
@@ -152,9 +150,15 @@
   "name": "Custom Flex Section",
   "settings": [
     {
-      "type": "color_scheme",
+      "type": "select",
       "id": "color_scheme",
       "label": "Color Scheme",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
       "default": "background-1"
     }
   ],
