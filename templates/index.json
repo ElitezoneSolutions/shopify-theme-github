@@ -311,10 +311,10 @@
         "padding_bottom": 52
       }
     },
-    "custom_feature_section_cweaPz": {
+    "custom_feature_section_mw4bGH": {
       "type": "Custom-Feature-Section",
       "blocks": {
-        "content_AdALMM": {
+        "content_iLxDaH": {
           "type": "content",
           "settings": {
             "heading": "Your Heading",
@@ -325,7 +325,7 @@
             "paragraph3": ""
           }
         },
-        "video_tghjPt": {
+        "video_eKYCfq": {
           "type": "video",
           "settings": {
             "video_url": "",
@@ -335,7 +335,7 @@
             "controls": true
           }
         },
-        "content_FPLB8U": {
+        "content_QztrBH": {
           "type": "content",
           "settings": {
             "heading": "Your Heading",
@@ -348,9 +348,9 @@
         }
       },
       "block_order": [
-        "content_AdALMM",
-        "video_tghjPt",
-        "content_FPLB8U"
+        "content_iLxDaH",
+        "video_eKYCfq",
+        "content_QztrBH"
       ],
       "settings": {
         "color_scheme": ""
@@ -364,6 +364,6 @@
     "wave_UeNcPN",
     "featured_review_slider_pLTA3J",
     "custom_liquid_XP7mgL",
-    "custom_feature_section_cweaPz"
+    "custom_feature_section_mw4bGH"
   ]
 }
