@@ -8,8 +8,18 @@
     gap: 20px;
     max-width: 1200px;
     margin: auto;
+  }
+  [data-color-scheme="background"] {
     background-color: rgb(var(--color-background));
     color: rgb(var(--color-text));
+  }
+  [data-color-scheme="accent"] {
+    background-color: rgb(var(--color-accent-1));
+    color: rgb(var(--color-text));
+  }
+  [data-color-scheme="inverse"] {
+    background-color: rgb(var(--color-base-inverse));
+    color: rgb(var(--color-background));
   }
   .custom-flex-section .feature-content {
     flex: 1;
@@ -33,11 +43,6 @@
     text-align: center;
     min-width: 300px;
   }
-  .custom-flex-section .video-container video {
-    width: 100%;
-    max-width: 400px;
-    object-fit: cover;
-  }
   .video-ratio-wrapper {
     position: relative;
     width: 100%;
@@ -59,7 +64,11 @@
   }
 </style>
 
-<div class="custom-flex-section">
+<div
+  id="custom-flex-section-{{ section.id }}"
+  class="custom-flex-section"
+  data-color-scheme="{{ section.settings.color_scheme }}"
+>
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'content' %}
@@ -136,7 +145,19 @@
 {% schema %}
 {
   "name": "Custom Flex Section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "options": [
+        { "value": "background", "label": "Background" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "background"
+    }
+  ],
   "blocks": [
     {
       "type": "content",
