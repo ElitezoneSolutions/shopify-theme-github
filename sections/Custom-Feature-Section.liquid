@@ -68,6 +68,22 @@
   .video-block.ratio-21-9 video {
       aspect-ratio: 21 / 9;
   }
+  .video-block.ratio-3-2 video {
+      aspect-ratio: 3 / 2;
+  }
+  .video-block.ratio-2-3 video {
+      aspect-ratio: 2 / 3;
+  }
+  .video-block.ratio-9-16 video {
+      aspect-ratio: 9 / 16;
+  }
+  .video-block.ratio-2-1 video {
+      aspect-ratio: 2 / 1;
+  }
+  /* For the 2.39:1 ratio, note the dot is escaped in the CSS selector */
+  .video-block.ratio-2\.39-1 video {
+      aspect-ratio: 2.39 / 1;
+  }
   @media (max-width: 767px) {
       .feature-content {
           flex-direction: row;
@@ -132,8 +148,6 @@
             | default: 'https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4'
           %}
           <video
-            width="600"
-            height="400"
             {% if block.settings.autoplay %}
               autoplay
             {% endif %}
@@ -262,7 +276,12 @@
             { "value": "16:9", "label": "16:9" },
             { "value": "4:3", "label": "4:3" },
             { "value": "1:1", "label": "1:1" },
-            { "value": "21:9", "label": "21:9" }
+            { "value": "21:9", "label": "21:9" },
+            { "value": "3:2", "label": "3:2" },
+            { "value": "2:3", "label": "2:3" },
+            { "value": "9:16", "label": "9:16" },
+            { "value": "2:1", "label": "2:1" },
+            { "value": "2.39:1", "label": "2.39:1" }
           ]
         }
       ]
