@@ -1,31 +1,23 @@
 <style>
-  body {
+  .feature-style-container {
     font-family: 'Inter', sans-serif;
-    padding: 0;
-    margin: 0;
-  }
-
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
-    gap: 20px;
+    background-color: {{ section.settings.background_color }};
     max-width: {{ section.settings.page_width }}px;
     margin: auto;
-    background-color: {{ section.settings.background_color }};
   }
 
   .feature-content {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 20px;
-    flex: 1;
-    min-width: 300px;
+    justify-content: center;
+    align-items: center;
   }
 
   .content {
+    flex: 1;
+    min-width: 300px;
     padding: 20px;
     text-align: center;
   }
@@ -38,39 +30,33 @@
     color: {{ section.settings.text_color }};
   }
 
-  #image,
-  #video {
+  .image-block,
+  .video-block {
     flex: 1;
     text-align: center;
     min-width: 300px;
   }
 
-  #image img,
-  #video video {
+  .image-block img,
+  .video-block video {
     width: 100%;
     max-width: 400px;
     height: auto;
-
+    border-radius: 8px;
   }
 
   @media (max-width: 767px) {
     .feature-content {
-      flex-direction: row;
+      flex-direction: column;
     }
 
     .content {
-      flex: 1;
-      padding: 0;
-    }
-
-    #image,
-    #video {
-      flex: 1;
+      padding: 10px;
     }
   }
 </style>
 
-<div class="container">
+<div class="feature-style-container">
   <div class="feature-content">
     {% for block in section.blocks %}
       {% if block.type == 'content' %}
@@ -87,11 +73,11 @@
           <p>{{ block.settings.paragraph_3 }}</p>
         </div>
       {% elsif block.type == 'image' %}
-        <div id="image">
+        <div class="image-block">
           <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text }}">
         </div>
       {% elsif block.type == 'video' %}
-        <div id="video">
+        <div class="video-block">
           <video
             {% if block.settings.autoplay %}
               autoplay
