@@ -1,4 +1,21 @@
 <style>
+  #custom-flex-section-{{ section.id }}.custom-flex-section,
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="background-1"] {
+    background-color: rgb(var(--color-background-1));
+    color: rgb(var(--color-text));
+  }
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="background-2"] {
+    background-color: rgb(var(--color-background-2));
+    color: rgb(var(--color-text));
+  }
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="accent-1"] {
+    background-color: rgb(var(--color-accent-1));
+    color: rgb(var(--color-text));
+  }
+  #custom-flex-section-{{ section.id }}.custom-flex-section[data-color-scheme="inverse"] {
+    background-color: rgb(var(--color-base-inverse));
+    color: rgb(var(--color-background-1));
+  }
   .custom-flex-section {
     display: flex;
     flex-wrap: wrap;
@@ -8,18 +25,6 @@
     gap: 20px;
     max-width: 1200px;
     margin: auto;
-  }
-  [data-color-scheme="background"] {
-    background-color: rgb(var(--color-background));
-    color: rgb(var(--color-text));
-  }
-  [data-color-scheme="accent"] {
-    background-color: rgb(var(--color-accent-1));
-    color: rgb(var(--color-text));
-  }
-  [data-color-scheme="inverse"] {
-    background-color: rgb(var(--color-base-inverse));
-    color: rgb(var(--color-background));
   }
   .custom-flex-section .feature-content {
     flex: 1;
@@ -96,23 +101,23 @@
         </div>
       {% when 'image' %}
         <div class="image-container">
-          {% if block.settings.image != blank %}
+          {% if block.settings.image != blank -%}
             <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text | escape }}">
-          {% endif %}
+          {%- endif %}
         </div>
       {% when 'video' %}
         {% assign ratio = block.settings.video_ratio | default: '16:9' %}
-        {% if ratio == '16:9' %}
-          {% assign ratio_percent = '56.25' %}
-        {% elsif ratio == '4:3' %}
-          {% assign ratio_percent = '75' %}
-        {% elsif ratio == '1:1' %}
-          {% assign ratio_percent = '100' %}
-        {% elsif ratio == '21:9' %}
-          {% assign ratio_percent = '42.86' %}
-        {% else %}
-          {% assign ratio_percent = '56.25' %}
-        {% endif %}
+        {% if ratio == '16:9' -%}
+          {%- assign ratio_percent = '56.25' -%}
+        {%- elsif ratio == '4:3' -%}
+          {%- assign ratio_percent = '75' -%}
+        {%- elsif ratio == '1:1' -%}
+          {%- assign ratio_percent = '100' -%}
+        {%- elsif ratio == '21:9' -%}
+          {%- assign ratio_percent = '42.86' -%}
+        {%- else -%}
+          {%- assign ratio_percent = '56.25' -%}
+        {%- endif %}
         <div class="video-container">
           <div class="video-ratio-wrapper" style="padding-bottom: {{ ratio_percent }}%;">
             {% assign video_url = block.settings.video_url
@@ -147,15 +152,10 @@
   "name": "Custom Flex Section",
   "settings": [
     {
-      "type": "select",
+      "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color Scheme",
-      "options": [
-        { "value": "background", "label": "Background" },
-        { "value": "accent", "label": "Accent" },
-        { "value": "inverse", "label": "Inverse" }
-      ],
-      "default": "background"
+      "default": "background-1"
     }
   ],
   "blocks": [
