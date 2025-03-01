@@ -1,4 +1,24 @@
-<style>
+{%- liquid
+  assign unique_id = section.id | append: '-' | append: 'now' | date: '%N'
+-%}
+{%- style -%}
+  #custom-flex-section-{{ section.id }}.custom-flex-section,
+  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--background-1 {
+    background-color: rgb(var(--color-background-1));
+    color: rgb(var(--color-text));
+  }
+  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--background-2 {
+    background-color: rgb(var(--color-background-2));
+    color: rgb(var(--color-text));
+  }
+  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--accent-1 {
+    background-color: rgb(var(--color-accent-1));
+    color: rgb(var(--color-text));
+  }
+  #custom-flex-section-{{ section.id }}.custom-flex-section.color-scheme--inverse {
+    background-color: rgb(var(--color-base-inverse));
+    color: rgb(var(--color-background-1));
+  }
   .custom-flex-section {
     display: flex;
     flex-wrap: wrap;
@@ -8,22 +28,6 @@
     gap: 20px;
     max-width: 1200px;
     margin: auto;
-  }
-  .custom-flex-section.color-scheme--background-1 {
-    background-color: rgb(var(--color-background-1));
-    color: rgb(var(--color-text));
-  }
-  .custom-flex-section.color-scheme--background-2 {
-    background-color: rgb(var(--color-background-2));
-    color: rgb(var(--color-text));
-  }
-  .custom-flex-section.color-scheme--accent-1 {
-    background-color: rgb(var(--color-accent-1));
-    color: rgb(var(--color-text));
-  }
-  .custom-flex-section.color-scheme--inverse {
-    background-color: rgb(var(--color-base-inverse));
-    color: rgb(var(--color-background-1));
   }
   .feature-content {
     flex: 1;
@@ -66,11 +70,12 @@
       flex-direction: row;
     }
   }
-</style>
+{%- endstyle -%}
 
 <div
   id="custom-flex-section-{{ section.id }}"
   class="custom-flex-section color-scheme--{{ section.settings.color_scheme }}"
+  data-unique-id="{{ unique_id }}"
 >
   {% for block in section.blocks %}
     {% case block.type %}
@@ -119,7 +124,7 @@
         <div class="video-container">
           <div class="video-ratio-wrapper" style="padding-bottom: {{ ratio_percent }}%;">
             {% assign video_url = block.settings.video_url
-              | default: 'https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4'
+              | default: 'https://cdn.shopify.com/videos/c/vp/default-video.mp4'
             %}
             <video
               aria-label="{{ block.settings.video_aria_label | escape }}"
