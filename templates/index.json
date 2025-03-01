@@ -318,33 +318,33 @@
           "type": "content",
           "settings": {
             "heading": "Your Heading",
-            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
-            "heading2": "Your Heading 2",
-            "paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
-            "heading3": "",
-            "paragraph3": ""
+            "paragraph": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
+            "heading_2": "Your Heading",
+            "paragraph_2": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
+            "heading_3": "",
+            "paragraph_3": ""
           }
         },
         "video_iQH8BQ": {
           "type": "video",
           "settings": {
             "video_url": "https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4",
-            "mute": true,
             "autoplay": true,
             "loop": true,
+            "muted": true,
             "controls": true,
-            "video_ratio": "2:3"
+            "video_ratio": "16:9"
           }
         },
         "content_QztrBH": {
           "type": "content",
           "settings": {
             "heading": "Your Heading",
-            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
-            "heading2": "Your Heading 2",
-            "paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
-            "heading3": "",
-            "paragraph3": ""
+            "paragraph": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
+            "heading_2": "Your Heading",
+            "paragraph_2": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
+            "heading_3": "",
+            "paragraph_3": ""
           }
         }
       },
@@ -353,9 +353,7 @@
         "video_iQH8BQ",
         "content_QztrBH"
       ],
-      "settings": {
-        "color_scheme": "scheme-1"
-      }
+      "settings": {}
     }
   },
   "order": [
