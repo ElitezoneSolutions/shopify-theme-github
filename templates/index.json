@@ -301,47 +301,51 @@
         "padding_bottom": 52
       }
     },
-    "custom_feature_section_EkaLTD": {
+    "custom_feature_section_G4hFzw": {
       "type": "Custom-Feature-Section",
       "blocks": {
-        "content_e7fy3L": {
+        "content_BQp9hQ": {
           "type": "content",
           "settings": {
             "heading_1": "Heading 1",
             "paragraph_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "heading_2": "Heading 2",
             "paragraph_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "heading_3": "",
-            "paragraph_3": ""
+            "heading_3": "Heading 3",
+            "paragraph_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           }
         },
-        "image_xaRiky": {
-          "type": "image",
+        "video_CB9CMa": {
+          "type": "video",
           "settings": {
-            "image": "shopify://shop_images/BENEFITS_2_1.png",
-            "alt_text": "Image"
+            "video_url": "https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4",
+            "autoplay": true,
+            "mute": true,
+            "controls": true,
+            "loop": true,
+            "ratio": "4/3"
           }
         },
-        "content_eYmVwT": {
+        "content_Dry8MQ": {
           "type": "content",
           "settings": {
             "heading_1": "Heading 1",
             "paragraph_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "heading_2": "Heading 2",
             "paragraph_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "heading_3": "",
-            "paragraph_3": ""
+            "heading_3": "Heading 3",
+            "paragraph_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           }
         }
       },
       "block_order": [
-        "content_e7fy3L",
-        "image_xaRiky",
-        "content_eYmVwT"
+        "content_BQp9hQ",
+        "video_CB9CMa",
+        "content_Dry8MQ"
       ],
       "settings": {
-        "background_color": "#ffffff",
-        "page_width": 1600,
+        "background_color": "#f0f0f0",
+        "page_width": 1200,
         "heading_color": "#000000",
         "text_color": "#333333"
       }
@@ -354,6 +358,6 @@
     "wave_UeNcPN",
     "featured_review_slider_pLTA3J",
     "custom_liquid_XP7mgL",
-    "custom_feature_section_EkaLTD"
+    "custom_feature_section_G4hFzw"
   ]
 }

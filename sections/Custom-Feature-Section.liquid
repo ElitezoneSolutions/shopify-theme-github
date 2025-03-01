@@ -1,96 +1,97 @@
 <style>
-  .feature-style-container {
+  body {
     font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
-    background-color: {{ section.settings.background_color }};
+    gap: 20px;
     max-width: {{ section.settings.page_width }}px;
     margin: auto;
+    background-color: {{ section.settings.background_color }};
   }
 
   .feature-content {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
-    align-items: center;
+    flex: 1;
+    min-width: 300px;
   }
 
   .content {
-    flex: 1;
-    min-width: 300px;
     padding: 20px;
     text-align: center;
   }
 
   .content h3 {
     color: {{ section.settings.heading_color }};
-    margin-bottom: 10px;
   }
 
   .content p {
     color: {{ section.settings.text_color }};
-    margin-top: 0;
   }
 
-  .image-block,
-  .video-block {
+  #image,
+  #video {
     flex: 1;
     text-align: center;
     min-width: 300px;
   }
 
-  .image-block img {
+  #image img,
+  #video video {
     width: 100%;
     max-width: 400px;
     height: auto;
-  }
 
-  .video-block video {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
   }
 
   @media (max-width: 767px) {
     .feature-content {
-      flex-direction: column;
+      flex-direction: row;
     }
 
     .content {
-      padding: 10px;
+      flex: 1;
+      padding: 0;
+    }
+
+    #image,
+    #video {
+      flex: 1;
     }
   }
 </style>
 
-<div class="feature-style-container">
+<div class="container">
   <div class="feature-content">
     {% for block in section.blocks %}
       {% if block.type == 'content' %}
         <div class="content">
-          {% if block.settings.heading_1 != blank or block.settings.paragraph_1 != blank %}
-            <h3>{{ block.settings.heading_1 }}</h3>
-            <p>{{ block.settings.paragraph_1 }}</p>
-          {% endif %}
+          <h3>{{ block.settings.heading_1 }}</h3>
+          <p>{{ block.settings.paragraph_1 }}</p>
         </div>
         <div class="content">
-          {% if block.settings.heading_2 != blank or block.settings.paragraph_2 != blank %}
-            <h3>{{ block.settings.heading_2 }}</h3>
-            <p>{{ block.settings.paragraph_2 }}</p>
-          {% endif %}
+          <h3>{{ block.settings.heading_2 }}</h3>
+          <p>{{ block.settings.paragraph_2 }}</p>
         </div>
         <div class="content">
-          {% if block.settings.heading_3 != blank or block.settings.paragraph_3 != blank %}
-            <h3>{{ block.settings.heading_3 }}</h3>
-            <p>{{ block.settings.paragraph_3 }}</p>
-          {% endif %}
+          <h3>{{ block.settings.heading_3 }}</h3>
+          <p>{{ block.settings.paragraph_3 }}</p>
         </div>
       {% elsif block.type == 'image' %}
-        <div class="image-block">
+        <div id="image">
           <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text }}">
         </div>
       {% elsif block.type == 'video' %}
-        <div class="video-block">
+        <div id="video">
           <video
             {% if block.settings.autoplay %}
               autoplay
