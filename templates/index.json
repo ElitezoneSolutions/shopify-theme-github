@@ -314,17 +314,26 @@
         "image_xaRiky": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/BENEFITS_2_1.png",
             "alt_text": "Image"
+          }
+        },
+        "content_eYmVwT": {
+          "type": "content",
+          "settings": {
+            "heading": "Heading",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           }
         }
       },
       "block_order": [
         "content_e7fy3L",
-        "image_xaRiky"
+        "image_xaRiky",
+        "content_eYmVwT"
       ],
       "settings": {
-        "background_color": "#f0f0f0",
-        "page_width": 1200,
+        "background_color": "#ffffff",
+        "page_width": 1600,
         "heading_color": "#000000",
         "text_color": "#333333"
       }
