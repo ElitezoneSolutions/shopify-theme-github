@@ -301,51 +301,32 @@
         "padding_bottom": 52
       }
     },
-    "custom_feature_section_mw4bGH": {
+    "custom_feature_section_EkaLTD": {
       "type": "Custom-Feature-Section",
       "blocks": {
-        "content_iLxDaH": {
+        "content_e7fy3L": {
           "type": "content",
           "settings": {
-            "heading": "Your Heading",
-            "paragraph": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
-            "heading_2": "Your Heading",
-            "paragraph_2": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
-            "heading_3": "",
-            "paragraph_3": ""
+            "heading": "Heading",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           }
         },
-        "video_iQH8BQ": {
-          "type": "video",
+        "image_xaRiky": {
+          "type": "image",
           "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4",
-            "autoplay": true,
-            "loop": true,
-            "muted": true,
-            "controls": false,
-            "video_ratio": "1:1",
-            "video_aria_label": "video"
-          }
-        },
-        "content_QztrBH": {
-          "type": "content",
-          "settings": {
-            "heading": "Your Heading",
-            "paragraph": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
-            "heading_2": "Your Heading",
-            "paragraph_2": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>",
-            "heading_3": "",
-            "paragraph_3": ""
+            "alt_text": "Image"
           }
         }
       },
       "block_order": [
-        "content_iLxDaH",
-        "video_iQH8BQ",
-        "content_QztrBH"
+        "content_e7fy3L",
+        "image_xaRiky"
       ],
       "settings": {
-        "color_scheme": "background"
+        "background_color": "#f0f0f0",
+        "page_width": 1200,
+        "heading_color": "#000000",
+        "text_color": "#333333"
       }
     }
   },
@@ -356,6 +337,6 @@
     "wave_UeNcPN",
     "featured_review_slider_pLTA3J",
     "custom_liquid_XP7mgL",
-    "custom_feature_section_mw4bGH"
+    "custom_feature_section_EkaLTD"
   ]
 }
