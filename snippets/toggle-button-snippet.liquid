@@ -1,0 +1,143 @@
+{% comment %} Toggle Button as Add-to-Cart Button Snippet {% endcomment %}
+<div class="toggle-button-wrapper">
+  <label class="toggle-switch">
+    <input type="checkbox" id="cart-toggle" aria-label="Toggle subscription">
+    <span class="toggle-slider"></span>
+  </label>
+  <p class="toggle-text">ADD TO CART</p>
+</div>
+
+<style>
+  .toggle-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    border: 1.3px solid black;
+    max-width: 44rem;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .toggle-text {
+    font-size: 16px;
+    margin: 0;
+    color: black;
+    font-weight: 500;
+    letter-spacing: 1px;
+    user-select: none;
+  }
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 2.5em;
+    height: 1.2em;
+  }
+  .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: grey;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+  }
+  .toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 0.8em;
+    width: 0.8em;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+  }
+  .toggle-switch input:checked + .toggle-slider {
+    background: black;
+  }
+  .toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(1.2em);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const addToCartButton = document.querySelector(".toggle-button-wrapper");
+    if (!addToCartButton) {
+      console.error("Add-to-cart div (toggle-button-wrapper) not found.");
+      return;
+    }
+
+    const addToCartForm = document.querySelector("form[action='/cart/add']");
+    if (!addToCartForm) {
+      console.error("Add-to-cart form not found.");
+      return;
+    }
+
+    addToCartButton.addEventListener("click", function(event) {
+      // If the click originated from within the toggle-switch element, do nothing.
+      if (event.target.closest(".toggle-switch")) {
+        return;
+      }
+
+      event.preventDefault();
+
+      // Change the toggle-text to indicate the process.
+      const toggleText = document.querySelector(".toggle-text");
+      if (toggleText) {
+        toggleText.textContent = "ADDING TO CART...";
+      }
+
+      // Get the subscription toggle element.
+      const toggle = document.getElementById("cart-toggle");
+      if (!toggle) {
+        console.error("Toggle element not found.");
+        return;
+      }
+
+      // Gather product information from the form.
+      const formData = new FormData(addToCartForm);
+      const productId = formData.get("id");
+      const quantity = formData.get("quantity") || 1;
+
+      // Build product data with the subscription property.
+      const productData = {
+        id: productId,
+        quantity: parseInt(quantity, 10),
+        properties: {
+          Subscription: toggle.checked ? "Yes" : "No"
+        }
+      };
+
+      // Send the product data to Shopify's AJAX API.
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(productData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok.");
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Product added to cart:", data);
+        window.location.reload(); // Refresh the page to update the cart display.
+      })
+      .catch(error => {
+        console.error("Error adding product to cart:", error);
+        // Optionally, revert toggle text back on error.
+        if (toggleText) {
+          toggleText.textContent = "SUBSCRIPTION";
+        }
+      });
+    });
+  });
+</script>
+
+{% comment %} Include this snippet in your Shopify Liquid section {% endcomment %}

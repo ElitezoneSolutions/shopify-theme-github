@@ -1,0 +1,53 @@
+<div id="shipping-time">Estimating the Shipping Time</div>
+
+<script>
+  function getEstimatedShippingTime() {
+    // Get today's date
+    const today = new Date();
+
+    // Fixed delays: start at 2 days and end at 5 days from today
+    const startDelay = 3;
+    const endDelay = 5;
+    
+    // Calculate start date (today + 2 days)
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() + startDelay);
+    
+    // Calculate end date (today + 5 days)
+    const endDate = new Date(today);
+    endDate.setDate(today.getDate() + endDelay);
+    
+    // Define months in short form
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    // Format the dates
+    const startMonth = months[startDate.getMonth()];
+    const startDay = startDate.getDate();
+    const endMonth = months[endDate.getMonth()];
+    const endDay = endDate.getDate();
+    
+    // Clear the loading animation interval
+    clearInterval(loadingInterval);
+    
+    // Set the final shipping message
+    const message = `Estimate delivery: <strong>${startMonth} ${startDay}</strong> - <strong>${endMonth} ${endDay}</strong>`;
+    document.getElementById("shipping-time").innerHTML = message;
+  }
+
+  // Dot animation variables
+  const messageBase = "Estimating the Shipping Time";
+  let dotCount = 0;
+  
+  // Animate dots by updating the text every 500ms
+  const loadingInterval = setInterval(function() {
+    dotCount = (dotCount % 3) + 1; // cycles from 1 to 3
+    let dots = "";
+    for (let i = 0; i < dotCount; i++) {
+      dots += ".";
+    }
+    document.getElementById("shipping-time").innerText = messageBase + dots;
+  }, 500);
+
+  // Wait 3 seconds before showing the final estimated shipping time
+  setTimeout(getEstimatedShippingTime, 3000);
+</script>
