@@ -4,7 +4,7 @@
   - It includes three block types:
       1. Content Block (three heading and paragraph pairs)
       2. Image Block (image picker)
-      3. Video Block (video URL with mute, autoplay, loop, and controls options)
+      3. Video Block (video URL with mute, autoplay, loop, controls, and ratio options)
   - A section setting allows you to choose a color scheme.
 {% endcomment %}
 
@@ -53,6 +53,21 @@
   .video-block video {
       width: 100%;
       max-width: 400px;
+      /* The aspect-ratio property helps maintain the container ratio */
+      object-fit: cover;
+  }
+  /* Aspect ratio classes */
+  .video-block.ratio-16-9 video {
+      aspect-ratio: 16 / 9;
+  }
+  .video-block.ratio-4-3 video {
+      aspect-ratio: 4 / 3;
+  }
+  .video-block.ratio-1-1 video {
+      aspect-ratio: 1 / 1;
+  }
+  .video-block.ratio-21-9 video {
+      aspect-ratio: 21 / 9;
   }
   @media (max-width: 767px) {
       .feature-content {
@@ -112,7 +127,8 @@
           {% endif %}
         </div>
       {% when 'video' %}
-        <div class="video-block">
+        {% assign ratio = block.settings.video_ratio | default: '16:9' %}
+        <div class="video-block ratio-{{ ratio | replace: ":", "-" }}">
           {% assign video_url = block.settings.video_url
             | default: 'https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4'
           %}
@@ -237,6 +253,18 @@
           "id": "controls",
           "label": "Show Controls",
           "default": true
+        },
+        {
+          "type": "select",
+          "id": "video_ratio",
+          "label": "Video Ratio",
+          "default": "16:9",
+          "options": [
+            { "value": "16:9", "label": "16:9" },
+            { "value": "4:3", "label": "4:3" },
+            { "value": "1:1", "label": "1:1" },
+            { "value": "21:9", "label": "21:9" }
+          ]
         }
       ]
     }
