@@ -328,12 +328,12 @@
         "video_iQH8BQ": {
           "type": "video",
           "settings": {
-            "video_url": "",
+            "video_url": "https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4",
             "mute": true,
             "autoplay": true,
             "loop": true,
             "controls": true,
-            "video_ratio": "21:9"
+            "video_ratio": "1:1"
           }
         },
         "content_QztrBH": {
