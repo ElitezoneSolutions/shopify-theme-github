@@ -311,37 +311,49 @@
         "padding_bottom": 52
       }
     },
-    "custom_feature_section_tGFKtH": {
+    "custom_feature_section_cweaPz": {
       "type": "Custom-Feature-Section",
       "blocks": {
-        "content_9Ck7VN": {
-          "type": "content",
-          "settings": {
-            "heading": "Your Headingasd",
-            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinasdia odio vitae vestibulum vestibulum."
-          }
-        },
-        "image_MJwFca": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/BENEFITS_2_1.png"
-          }
-        },
-        "content_janbXG": {
+        "content_AdALMM": {
           "type": "content",
           "settings": {
             "heading": "Your Heading",
-            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum."
+            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
+            "heading2": "Your Heading 2",
+            "paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
+            "heading3": "",
+            "paragraph3": ""
+          }
+        },
+        "video_n8MNmX": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "mute": true,
+            "autoplay": true,
+            "loop": true,
+            "controls": true
+          }
+        },
+        "content_FPLB8U": {
+          "type": "content",
+          "settings": {
+            "heading": "Your Heading",
+            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
+            "heading2": "Your Heading 2",
+            "paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
+            "heading3": "",
+            "paragraph3": ""
           }
         }
       },
       "block_order": [
-        "content_9Ck7VN",
-        "image_MJwFca",
-        "content_janbXG"
+        "content_AdALMM",
+        "video_n8MNmX",
+        "content_FPLB8U"
       ],
       "settings": {
-        "color_scheme": "scheme-1"
+        "color_scheme": ""
       }
     }
   },
@@ -352,6 +364,6 @@
     "wave_UeNcPN",
     "featured_review_slider_pLTA3J",
     "custom_liquid_XP7mgL",
-    "custom_feature_section_tGFKtH"
+    "custom_feature_section_cweaPz"
   ]
 }
