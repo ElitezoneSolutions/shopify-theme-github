@@ -1,101 +1,3 @@
-{% schema %}
-{
-  "name": "Feature Style Section",
-  "settings": [
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#f0f0f0"
-    },
-    {
-      "type": "range",
-      "id": "page_width",
-      "label": "Page Width",
-      "min": 800,
-      "max": 1600,
-      "step": 10,
-      "default": 1200,
-      "unit": "px"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#333333"
-    }
-  ],
-  "blocks": [
-    {
-  "type": "content",
-  "name": "Content Block",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Heading 1"
-    },
-    {
-      "type": "text",
-      "id": "heading_1",
-      "label": "Heading 1",
-      "default": "Heading 1"
-    },
-    {
-      "type": "textarea",
-      "id": "paragraph_1",
-      "label": "Paragraph 1",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },
-    {
-      "type": "header",
-      "content": "Heading 2"
-    },
-    {
-      "type": "text",
-      "id": "heading_2",
-      "label": "Heading 2",
-      "default": "Heading 2"
-    },
-    {
-      "type": "textarea",
-      "id": "paragraph_2",
-      "label": "Paragraph 2",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },
-    {
-      "type": "header",
-      "content": "Heading 3"
-    },
-    {
-      "type": "text",
-      "id": "heading_3",
-      "label": "Heading 3",
-      "default": "Heading 3"
-    },
-    {
-      "type": "textarea",
-      "id": "paragraph_3",
-      "label": "Paragraph 3",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    }
-  ]
-}
-  ],
-  "presets": [
-    {
-      "name": "Feature Style Section",
-      "category": "Custom"
-    }
-  ]
-}
-{% endschema %}
-
 <style>
   .feature-style-container {
     font-family: 'Inter', sans-serif;
@@ -156,8 +58,20 @@
     {% for block in section.blocks %}
       {% if block.type == 'content' %}
         <div class="content">
-          <h3>{{ block.settings.heading }}</h3>
-          <p>{{ block.settings.text }}</p>
+          {% if block.settings.heading_1 != blank or block.settings.paragraph_1 != blank %}
+            <h3>{{ block.settings.heading_1 }}</h3>
+            <p>{{ block.settings.paragraph_1 }}</p>
+          {% endif %}
+
+          {% if block.settings.heading_2 != blank or block.settings.paragraph_2 != blank %}
+            <h3>{{ block.settings.heading_2 }}</h3>
+            <p>{{ block.settings.paragraph_2 }}</p>
+          {% endif %}
+
+          {% if block.settings.heading_3 != blank or block.settings.paragraph_3 != blank %}
+            <h3>{{ block.settings.heading_3 }}</h3>
+            <p>{{ block.settings.paragraph_3 }}</p>
+          {% endif %}
         </div>
       {% elsif block.type == 'image' %}
         <div class="image-block">
@@ -167,3 +81,118 @@
     {% endfor %}
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Feature Style Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "range",
+      "id": "page_width",
+      "label": "Page Width",
+      "min": 800,
+      "max": 1600,
+      "step": 10,
+      "default": 1200,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Content Block",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Heading 1"
+        },
+        {
+          "type": "text",
+          "id": "heading_1",
+          "label": "Heading 1",
+          "default": "Heading 1"
+        },
+        {
+          "type": "textarea",
+          "id": "paragraph_1",
+          "label": "Paragraph 1",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "type": "header",
+          "content": "Heading 2"
+        },
+        {
+          "type": "text",
+          "id": "heading_2",
+          "label": "Heading 2",
+          "default": "Heading 2"
+        },
+        {
+          "type": "textarea",
+          "id": "paragraph_2",
+          "label": "Paragraph 2",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "type": "header",
+          "content": "Heading 3"
+        },
+        {
+          "type": "text",
+          "id": "heading_3",
+          "label": "Heading 3",
+          "default": "Heading 3"
+        },
+        {
+          "type": "textarea",
+          "id": "paragraph_3",
+          "label": "Paragraph 3",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt Text",
+          "default": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Style Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
