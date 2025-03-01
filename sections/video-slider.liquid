@@ -2,15 +2,14 @@
   Custom Flex Section using Shopify dynamic color variables.
 
   This section includes three block types:
-    • Content Block (supports up to three sets of heading & paragraph)
+    • Content Block (with up to three sets of heading & paragraph)
     • Image Block (with image picker and alt text for SEO)
     • Video Block (with URL, autoplay, loop, muted, controls, a selectable video ratio, and an aria-label for accessibility)
 
   The CSS uses Shopify’s native dynamic color variables (e.g.:
     rgb(var(--color-background)) and rgb(var(--color-text))).
-  The video block uses a padding-bottom hack to enforce the chosen aspect ratio.
 
-  Adjust the CSS variable names if your theme uses different ones.
+  The video block uses a padding-bottom hack with a conditional mapping to enforce the chosen aspect ratio.
 {% endcomment %}
 
 <style>
@@ -103,16 +102,23 @@
           {% endif %}
         </div>
       {% when 'video' %}
-        {%- assign ratio = block.settings.video_ratio | default: '16:9' -%}
-        {%- assign parts = ratio | split: ':' -%}
-        {%- assign width_part = parts[0] | plus: 0 -%}
-        {%- assign height_part = parts[1] | plus: 0 -%}
-        {%- assign ratio_percent = height_part | times: 100 | divided_by: width_part -%}
+        {% assign ratio = block.settings.video_ratio | default: '16:9' %}
+        {% if ratio == '16:9' %}
+          {% assign ratio_percent = '56.25' %}
+        {% elsif ratio == '4:3' %}
+          {% assign ratio_percent = '75' %}
+        {% elsif ratio == '1:1' %}
+          {% assign ratio_percent = '100' %}
+        {% elsif ratio == '21:9' %}
+          {% assign ratio_percent = '42.86' %}
+        {% else %}
+          {% assign ratio_percent = '56.25' %}
+        {% endif %}
         <div class="video-container">
           <div class="video-ratio-wrapper" style="padding-bottom: {{ ratio_percent }}%;">
-            {%- assign video_url = block.settings.video_url
+            {% assign video_url = block.settings.video_url
               | default: 'https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4'
-            -%}
+            %}
             <video
               aria-label="{{ block.settings.video_aria_label | escape }}"
               {% if block.settings.autoplay %}
