@@ -74,23 +74,34 @@
       {% when 'content' %}
         <div class="feature-content">
           <div class="content">
-            {% if block.settings.heading != blank %}
-              <h3>{{ block.settings.heading }}</h3>
+            {% comment %} Pair 1 {% endcomment %}
+            {% if block.settings.heading != blank or block.settings.paragraph != blank %}
+              {% if block.settings.heading != blank %}
+                <h3>{{ block.settings.heading }}</h3>
+              {% endif %}
+              {% if block.settings.paragraph != blank %}
+                <p>{{ block.settings.paragraph }}</p>
+              {% endif %}
             {% endif %}
-            {% if block.settings.paragraph != blank %}
-              <p>{{ block.settings.paragraph }}</p>
+
+            {% comment %} Pair 2 {% endcomment %}
+            {% if block.settings.heading2 != blank or block.settings.paragraph2 != blank %}
+              {% if block.settings.heading2 != blank %}
+                <h3>{{ block.settings.heading2 }}</h3>
+              {% endif %}
+              {% if block.settings.paragraph2 != blank %}
+                <p>{{ block.settings.paragraph2 }}</p>
+              {% endif %}
             {% endif %}
-            {% if block.settings.heading2 != blank %}
-              <h3>{{ block.settings.heading2 }}</h3>
-            {% endif %}
-            {% if block.settings.paragraph2 != blank %}
-              <p>{{ block.settings.paragraph2 }}</p>
-            {% endif %}
-            {% if block.settings.heading3 != blank %}
-              <h3>{{ block.settings.heading3 }}</h3>
-            {% endif %}
-            {% if block.settings.paragraph3 != blank %}
-              <p>{{ block.settings.paragraph3 }}</p>
+
+            {% comment %} Pair 3 {% endcomment %}
+            {% if block.settings.heading3 != blank or block.settings.paragraph3 != blank %}
+              {% if block.settings.heading3 != blank %}
+                <h3>{{ block.settings.heading3 }}</h3>
+              {% endif %}
+              {% if block.settings.paragraph3 != blank %}
+                <p>{{ block.settings.paragraph3 }}</p>
+              {% endif %}
             {% endif %}
           </div>
         </div>
