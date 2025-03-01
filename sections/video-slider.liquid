@@ -6,10 +6,12 @@
     • Image Block (with image picker and alt text for SEO)
     • Video Block (with URL, autoplay, loop, muted, controls, a selectable video ratio, and an aria-label for accessibility)
 
-  The CSS uses Shopify’s native dynamic color variables (e.g.:
+  The CSS uses Shopify’s dynamic color variables (e.g.:
     rgb(var(--color-background)) and rgb(var(--color-text))).
 
-  The video block uses a padding-bottom hack with a conditional mapping to enforce the chosen aspect ratio.
+  The video block uses a padding-bottom hack (with height: 0) to enforce the chosen aspect ratio.
+
+  Adjust the CSS variable names if your theme uses different ones.
 {% endcomment %}
 
 <style>
@@ -52,6 +54,7 @@
   .video-ratio-wrapper {
     position: relative;
     width: 100%;
+    height: 0;
     overflow: hidden;
   }
   .video-ratio-wrapper video {
