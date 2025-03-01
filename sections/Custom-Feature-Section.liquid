@@ -30,19 +30,16 @@
     color: {{ section.settings.text_color }};
   }
 
-  .image-block,
-  .video-block {
+  .image-block {
     flex: 1;
     text-align: center;
     min-width: 300px;
   }
 
-  .image-block img,
-  .video-block video {
+  .image-block img {
     width: 100%;
     max-width: 400px;
     height: auto;
-    border-radius: 8px;
   }
 
   @media (max-width: 767px) {
@@ -61,41 +58,24 @@
     {% for block in section.blocks %}
       {% if block.type == 'content' %}
         <div class="content">
-          <h3>{{ block.settings.heading_1 }}</h3>
-          <p>{{ block.settings.paragraph_1 }}</p>
-        </div>
-        <div class="content">
-          <h3>{{ block.settings.heading_2 }}</h3>
-          <p>{{ block.settings.paragraph_2 }}</p>
-        </div>
-        <div class="content">
-          <h3>{{ block.settings.heading_3 }}</h3>
-          <p>{{ block.settings.paragraph_3 }}</p>
+          {% if block.settings.heading_1 != blank or block.settings.paragraph_1 != blank %}
+            <h3>{{ block.settings.heading_1 }}</h3>
+            <p>{{ block.settings.paragraph_1 }}</p>
+          {% endif %}
+
+          {% if block.settings.heading_2 != blank or block.settings.paragraph_2 != blank %}
+            <h3>{{ block.settings.heading_2 }}</h3>
+            <p>{{ block.settings.paragraph_2 }}</p>
+          {% endif %}
+
+          {% if block.settings.heading_3 != blank or block.settings.paragraph_3 != blank %}
+            <h3>{{ block.settings.heading_3 }}</h3>
+            <p>{{ block.settings.paragraph_3 }}</p>
+          {% endif %}
         </div>
       {% elsif block.type == 'image' %}
         <div class="image-block">
           <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text }}">
-        </div>
-      {% elsif block.type == 'video' %}
-        <div class="video-block">
-          <video
-            {% if block.settings.autoplay %}
-              autoplay
-            {% endif %}
-            {% if block.settings.mute %}
-              muted
-            {% endif %}
-            {% if block.settings.controls %}
-              controls
-            {% endif %}
-            {% if block.settings.loop %}
-              loop
-            {% endif %}
-            style="aspect-ratio: {{ block.settings.ratio }};"
-          >
-            <source src="{{ block.settings.video_url }}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
         </div>
       {% endif %}
     {% endfor %}
@@ -204,62 +184,6 @@
           "id": "alt_text",
           "label": "Alt Text",
           "default": "Image"
-        }
-      ]
-    },
-    {
-      "type": "video",
-      "name": "Video Block",
-      "settings": [
-        {
-          "type": "url",
-          "id": "video_url",
-          "label": "Video URL",
-          "info": "Upload your video to Shopify Files and paste the URL here."
-        },
-        {
-          "type": "checkbox",
-          "id": "autoplay",
-          "label": "Autoplay",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "mute",
-          "label": "Mute",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "controls",
-          "label": "Show Controls",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "loop",
-          "label": "Loop",
-          "default": true
-        },
-        {
-          "type": "select",
-          "id": "ratio",
-          "label": "Video Aspect Ratio",
-          "options": [
-            {
-              "value": "16/9",
-              "label": "16:9"
-            },
-            {
-              "value": "4/3",
-              "label": "4:3"
-            },
-            {
-              "value": "1/1",
-              "label": "1:1"
-            }
-          ],
-          "default": "16/9"
         }
       ]
     }
