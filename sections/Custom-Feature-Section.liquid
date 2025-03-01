@@ -1,129 +1,111 @@
 {% schema %}
 {
     "name": "Custom Feature Section",
-    "settings": [
-        {
-            "type": "number",
-            "id": "page_width",
-            "label": "Page Width",
-            "default": 1200
-        }
-    ],
-    "blocks": [
-        {
-            "type": "feature",
-            "name": "Feature",
-            "settings": [
-                {
-                    "type": "text",
-                    "id": "heading",
-                    "label": "Heading"
-                },
-                {
-                    "type": "textarea",
-                    "id": "text",
-                    "label": "Text"
-                },
-                {
-                    "type": "image_picker",
-                    "id": "image",
-                    "label": "Image"
-                },
-                {
-                    "type": "text",
-                    "id": "alt_text",
-                    "label": "Image Alt Text"
-                }
-            ]
-        }
-    ],
+    "settings": [],
+    "blocks": [],
     "presets": [
         {
-            "name": "Default",
-            "category": "Custom"
+            "name": "Default"
         }
     ]
 }
 {% endschema %}
 
-{% stylesheet %}
-  .custom-feature-section-body {
-      padding: 0;
+<style>
+  body {
+          font-family: 'inter', sans-serif;
+          padding: 0;
   }
 
-  .custom-feature-section-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      gap: 20px;
-      margin: auto;
-      background-color: #f0f0f0;
+  .container {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          gap: 20px;
+          max-width: 1200px;
+          margin: auto;
+          background-color: #f0f0f0;
+  }
+  .feature-content {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          flex: 1;
+          min-width: 300px;
   }
 
-  .custom-feature-section-feature-content {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      flex: 1;
-      min-width: 300px;
+  .content {
+          padding: 20px;
+          text-align: center;
   }
 
-  .custom-feature-section-content {
-      padding: 20px;
-      text-align: center;
+  #image {
+          flex: 1;
+          text-align: center;
+          min-width: 300px;
   }
 
-  .custom-feature-section-image {
-      flex: 1;
-      text-align: center;
-      min-width: 300px;
-  }
-
-  .custom-feature-section-image img {
-      width: 100%;
-      max-width: 400px;
+  #image img {
+          width: 100%;
+          max-width: 400px;
   }
 
   @media (max-width: 767px) {
-      .custom-feature-section-feature-content {
-          flex-direction: row;
-      }
+          .feature-content {
+                  flex-direction: row;
+          }
 
-      .custom-feature-section-content {
-          flex: 1;
-          padding: 0px;
-      }
+          .content {
+                  flex: 1;
+                  padding: 0px;
+          }
 
-      .custom-feature-section-image {
-          flex: 1;
-      }
+          #image {
+                  flex: 1;
+          }
   }
-{% endstylesheet %}
+</style>
 
-<section
-  class="custom-feature-section-container"
-  style="max-width: {% raw %}{{ section.settings.page_width }}{% endraw %}px;"
->
-  {% for block in section.blocks %}
-    <article class="custom-feature-section-feature-content">
-      <div class="custom-feature-section-content">
-        <h2>{{ block.settings.heading }}</h2>
-        <p>{{ block.settings.text }}</p>
-      </div>
-      <div class="custom-feature-section-image">
-        <img
-          src="{{ block.settings.image | img_url: '600x400' }}"
-          srcset="
-            {{ block.settings.image | img_url: '300x200' }} 300w,
-            {{ block.settings.image | img_url: '600x400' }} 600w,
-            {{ block.settings.image | img_url: '900x600' }} 900w
-          "
-          sizes="(max-width: 767px) 300px, (max-width: 1200px) 600px, 900px"
-          alt="{{ block.settings.alt_text }}"
-        >
-      </div>
-    </article>
-  {% endfor %}
-</section>
+<div class="container">
+  <div class="feature-content">
+    <div class="content">
+      <h3>heading</h3>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus aspernatur ducimus quos itaque quia quibusdam
+        reiciendis sapiente. Ex eius incidunt nulla blanditiis velit aspernatur voluptate, quas quia, iure, voluptatem
+        dolorum?
+      </p>
+    </div>
+    <div class="content">
+      <h3>heading</h3>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus aspernatur ducimus quos itaque quia quibusdam
+        reiciendis sapiente. Ex eius incidunt nulla blanditiis velit aspernatur voluptate, quas quia, iure, voluptatem
+        dolorum?
+      </p>
+    </div>
+  </div>
+  <div id="image">
+    <img src="https://placehold.co/600x400" alt="image">
+  </div>
+  <div class="feature-content">
+    <div class="content">
+      <h3>heading</h3>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus aspernatur ducimus quos itaque quia quibusdam
+        reiciendis sapiente. Ex eius incidunt nulla blanditiis velit aspernatur voluptate, quas quia, iure, voluptatem
+        dolorum?
+      </p>
+    </div>
+    <div class="content">
+      <h3>heading</h3>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus aspernatur ducimus quos itaque quia quibusdam
+        reiciendis sapiente. Ex eius incidunt nulla blanditiis velit aspernatur voluptate, quas quia, iure, voluptatem
+        dolorum?
+      </p>
+    </div>
+  </div>
+</div>
