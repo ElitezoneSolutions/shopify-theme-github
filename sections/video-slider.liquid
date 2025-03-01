@@ -1,512 +1,196 @@
-{%- liquid
-  assign unique_id = section.id | append: '-' | append: 'now' | date: '%N'
--%}
+{% comment %}
+  Custom Flex Section using Shopify dynamic color variables.
 
-{%- style -%}
-.video-slider-{{ section.id }} {
-  background: {{ section.settings.background_color }};
-  padding: 40px 0;
-  position: relative;
-}
-.video-slider-{{ section.id }} .heading {
-  text-align: {{ section.settings.text_alignment }};
-  font-size: {{ section.settings.heading_size }}px;
-  margin-bottom: 30px;
-  color: {{ section.settings.text_color }};
-}
-.video-slider-{{ section.id }} .slider {
-  overflow: hidden;
-  max-width: 100%;
-  margin: 0 auto;
-}
-.video-slider-{{ section.id }} .slider-track {
-  display: flex;
-  gap: {{ section.settings.slide_gap }}px;
-  transition: transform 0.5s ease;
-}
-.video-slider-{{ section.id }} .slide {
-  flex: 0 0 calc((100% - ({{ section.settings.slides_to_show | minus: 1 }} * {{ section.settings.slide_gap }}px)) / {{ section.settings.slides_to_show }});
-  box-sizing: border-box;
-}
-@media screen and (max-width: 749px) {
-  {% if section.settings.enable_mobile_peek %}
-    .video-slider-{{ section.id }} .slider {
-      overflow: visible;
-    }
-    .video-slider-{{ section.id }} .slide {
-      flex: 0 0 calc(((100% - ({{ section.settings.mobile_slides_to_show }} * {{ section.settings.slide_gap }}px)) * 10) / ({{ section.settings.mobile_slides_to_show | times: 10 | plus: 1 }}));
-    }
-  {% else %}
-    .video-slider-{{ section.id }} .slide {
-      flex: 0 0 calc((100% - ({{ section.settings.mobile_slides_to_show | minus: 1 }} * {{ section.settings.slide_gap }}px)) / {{ section.settings.mobile_slides_to_show }});
-    }
-  {% endif %}
-}
-.video-slider-{{ section.id }} .video-wrapper {
-  position: relative;
-  width: 100%;
-  background: #000;
-  overflow: hidden;
-  border-radius: 8px;
-  {% case section.settings.aspect_ratio %}
-    {% when '16:9' %} padding-top: 56.25%;
-    {% when '4:3' %} padding-top: 75%;
-    {% when '1:1' %} padding-top: 100%;
-    {% when '9:16' %} padding-top: 177.78%;
-  {% endcase %}
-}
-.video-slider-{{ section.id }} .video-player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.video-slider-{{ section.id }} .nav-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-.video-slider-{{ section.id }} .nav-controls button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  flex: 0 0 auto;
-  padding: 0;
-}
-.video-slider-{{ section.id }} .nav-controls .nav-prev,
-.video-slider-{{ section.id }} .nav-controls .nav-next {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.video-slider-{{ section.id }} .nav-controls .nav-prev svg,
-.video-slider-{{ section.id }} .nav-controls .nav-next svg {
-  width: 16px;
-  height: auto;
-  fill: #fff;
-}
-.video-slider-{{ section.id }} .nav-controls .nav-prev svg.left-arrow {
-  transform: rotate(90deg);
-}
-.video-slider-{{ section.id }} .nav-controls .nav-next svg.right-arrow {
-  transform: rotate(-90deg);
-}
-.video-slider-{{ section.id }} .nav-controls .dots {
-  display: flex;
-  gap: 8px;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-}
-.video-slider-{{ section.id }} .nav-controls .dots .dot {
-  width: 12px;
-  height: 12px;
-  background-color: #ccc;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.5s ease;
-}
-.video-slider-{{ section.id }} .nav-controls .dots .dot.active {
-  background-color: #000;
-  width: 24px;
-  transform: scale(1.1);
-}
-{%- endstyle -%}
+  This section includes three block types:
+    • Content Block (supports up to three sets of heading & paragraph)
+    • Image Block (with image picker and alt text for SEO)
+    • Video Block (with URL, autoplay, loop, muted, controls, a selectable video ratio, and an aria-label for accessibility)
 
-<div class="page-width">
-  <div style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;" id="video-slider-{{ unique_id }}" class="video-slider-{{ section.id }}"
-       data-slides-to-show="{{ section.settings.slides_to_show }}"
-       data-mobile-slides-to-show="{{ section.settings.mobile_slides_to_show }}"
-       data-slider-autoplay="{{ section.settings.slider_autoplay }}"
-       data-slider-autoplay-speed="{{ section.settings.slider_autoplay_speed | times: 1000 }}">
-    {% if section.settings.title != blank %}
-      <h2 class="heading">{{ section.settings.title }}</h2>
-    {% endif %}
-    
-    <div class="slider">
-      <div class="slider-track">
-        {% for block in section.blocks %}
-          <div class="slide" {{ block.shopify_attributes }}>
-            <div class="video-wrapper">
-              {% if block.settings.video_file != blank %}
-                <p style="display:none;">Debug: {{ block.settings.video_file | file_url }}</p>
-                <video class="video-player" playsinline preload="metadata"
-                  {% if block.settings.video_autoplay %} autoplay {% endif %}
-                  {% if block.settings.video_mute %} muted {% endif %}
-                  {% if block.settings.video_controls %} controls {% endif %}
-                  {% if block.settings.video_loop %} loop {% endif %}
-                  {% if block.settings.thumbnail != blank %}
-                    poster="{{ block.settings.thumbnail | image_url: width: 1200 }}"
-                  {% endif %}>
-                  <source src="{{ block.settings.video_file.sources[1].url }}" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              {% else %}
-                <div class="video-placeholder" style="color:#fff; text-align:center;">
-                    {% if block.settings.thumbnail != blank %}
-                    <img src="{{ block.settings.thumbnail | image_url: width: 600 }}" alt="{{ block.settings.title }}" width="600" height="auto">
-                  {% else %}
-                    <span>No video available</span>
-                  {% endif %}
-                </div>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    
-    <div class="nav-controls">
-      <button class="nav-prev" aria-label="Previous slide">
-        <svg class="icon icon-caret left-arrow" viewBox="0 0 10 6">
-          <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-      <div class="dots">
-        {% for block in section.blocks %}
-          <button class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></button>
-        {% endfor %}
-      </div>
-      <button class="nav-next" aria-label="Next slide">
-        <svg class="icon icon-caret right-arrow" viewBox="0 0 10 6">
-          <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-    </div>
-  </div>
-</div>
+  The CSS uses Shopify’s native dynamic color variables (e.g.:
+    rgb(var(--color-background)) and rgb(var(--color-text))).
+  The video block uses a padding-bottom hack to enforce the chosen aspect ratio.
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  function initVideoSlider(sliderElem) {
-    var track = sliderElem.querySelector('.slider-track');
-    var originalSlides = Array.prototype.slice.call(track.children);
-    
-    function getActiveSlidesToShow() {
-      var defaultSlidesToShow = parseInt(sliderElem.getAttribute('data-slides-to-show'), 10) || 1;
-      var mobileSlidesToShow = parseInt(sliderElem.getAttribute('data-mobile-slides-to-show'), 10) || defaultSlidesToShow;
-      return (window.innerWidth < 750) ? mobileSlidesToShow : defaultSlidesToShow;
-    }
-    
-    var activeCount = getActiveSlidesToShow();
-    var origCount = originalSlides.length;
-    
-    for (var i = origCount - activeCount; i < origCount; i++) {
-      var clone = originalSlides[i].cloneNode(true);
-      clone.classList.add('clone');
-      track.insertBefore(clone, track.firstChild);
-    }
-    for (var i = 0; i < activeCount; i++) {
-      var clone = originalSlides[i].cloneNode(true);
-      clone.classList.add('clone');
-      track.appendChild(clone);
-    }
-    
-    var slides = Array.prototype.slice.call(track.children);
-    var currentSlide = activeCount;
-    
-    var navPrev = sliderElem.querySelector('.nav-controls .nav-prev');
-    var navNext = sliderElem.querySelector('.nav-controls .nav-next');
-    var dots = sliderElem.querySelectorAll('.nav-controls .dot');
-    
-    var sliderAutoplay = sliderElem.getAttribute('data-slider-autoplay') === 'true';
-    var sliderAutoplaySpeed = parseInt(sliderElem.getAttribute('data-slider-autoplay-speed'), 10) || 5000;
-    var autoplayInterval;
-    
-    track.style.transition = 'transform 0.5s ease';
-    
-    function updateSlider(noTransition) {
-      var slideWidth = slides[0].offsetWidth;
-      var computedStyle = getComputedStyle(track);
-      var gap = parseInt(computedStyle.gap) || 0;
-      if (noTransition) {
-         track.style.transition = 'none';
-      } else {
-         track.style.transition = 'transform 0.5s ease';
-      }
-      var offset = currentSlide * (slideWidth + gap);
-      track.style.transform = 'translateX(' + (-offset) + 'px)';
-      
-      var activeDotIndex = (currentSlide - activeCount) % origCount;
-      if (activeDotIndex < 0) activeDotIndex += origCount;
-      dots.forEach(function(dot, index) {
-        if (index === activeDotIndex) {
-          dot.classList.add('active');
-        } else {
-          dot.classList.remove('active');
-        }
-      });
-    }
-    
-    track.addEventListener('transitionend', function() {
-      if (currentSlide >= origCount + activeCount) {
-        currentSlide = activeCount;
-        updateSlider(true);
-      } else if (currentSlide < activeCount) {
-        currentSlide = origCount + currentSlide;
-        updateSlider(true);
-      }
-    });
-    
-    if (navPrev) {
-      navPrev.addEventListener('click', function() {
-        currentSlide--;
-        updateSlider();
-      });
-    }
-    if (navNext) {
-      navNext.addEventListener('click', function() {
-        currentSlide++;
-        updateSlider();
-      });
-    }
-    
-    dots.forEach(function(dot) {
-      dot.addEventListener('click', function() {
-        var index = parseInt(dot.getAttribute('data-index'), 10);
-        currentSlide = activeCount + index;
-        updateSlider();
-      });
-    });
-    
-    var videos = sliderElem.querySelectorAll('video');
-    videos.forEach(function(video) {
-      var sourceElem = video.querySelector('source');
-      var mobileSrc = sourceElem.getAttribute('data-mobile-src');
-      if (mobileSrc && window.innerWidth < 750) {
-        sourceElem.src = mobileSrc;
-        video.load();
-      }
-      video.addEventListener('loadeddata', function() {
-        console.log('Video loaded:', video);
-      });
-      video.addEventListener('error', function(e) {
-        console.error('Video error:', video, e);
-      });
-    });
-    
-    if (sliderAutoplay) {
-      autoplayInterval = setInterval(function() {
-        currentSlide++;
-        updateSlider();
-      }, sliderAutoplaySpeed);
-      
-      sliderElem.addEventListener('mouseenter', function() {
-        clearInterval(autoplayInterval);
-      });
-      sliderElem.addEventListener('mouseleave', function() {
-        autoplayInterval = setInterval(function() {
-          currentSlide++;
-          updateSlider();
-        }, sliderAutoplaySpeed);
-      });
-    }
-    
-    updateSlider();
-    window.addEventListener('resize', function() {
-      updateSlider();
-    });
+  Adjust the CSS variable names if your theme uses different ones.
+{% endcomment %}
+
+<style>
+  /* Section styling using Shopify dynamic color variables */
+  .custom-flex-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: rgb(var(--color-background));
+    color: rgb(var(--color-text));
   }
-  
-  var sliders = document.querySelectorAll('.video-slider-{{ section.id }}');
-  sliders.forEach(function(slider) {
-    initVideoSlider(slider);
-  });
-});
-</script>
+  .custom-flex-section .feature-content {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .custom-flex-section .content {
+    text-align: center;
+  }
+  .custom-flex-section .image-container {
+    text-align: center;
+    min-width: 300px;
+  }
+  .custom-flex-section .image-container img {
+    width: 100%;
+    max-width: 400px;
+  }
+  .custom-flex-section .video-container {
+    text-align: center;
+    min-width: 300px;
+  }
+  /* Video ratio wrapper using the padding-bottom hack */
+  .video-ratio-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .video-ratio-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 767px) {
+    .custom-flex-section .feature-content {
+      flex-direction: row;
+    }
+  }
+</style>
+
+<div class="custom-flex-section">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'content' %}
+        <div class="feature-content">
+          <div class="content">
+            {% if block.settings.heading != blank %}
+              <h3>{{ block.settings.heading }}</h3>
+            {% endif %}
+            {% if block.settings.paragraph != blank %}
+              <p>{{ block.settings.paragraph }}</p>
+            {% endif %}
+            {% if block.settings.heading_2 != blank %}
+              <h3>{{ block.settings.heading_2 }}</h3>
+            {% endif %}
+            {% if block.settings.paragraph_2 != blank %}
+              <p>{{ block.settings.paragraph_2 }}</p>
+            {% endif %}
+            {% if block.settings.heading_3 != blank %}
+              <h3>{{ block.settings.heading_3 }}</h3>
+            {% endif %}
+            {% if block.settings.paragraph_3 != blank %}
+              <p>{{ block.settings.paragraph_3 }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% when 'image' %}
+        <div class="image-container">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '600x400' }}" alt="{{ block.settings.alt_text | escape }}">
+          {% endif %}
+        </div>
+      {% when 'video' %}
+        {%- assign ratio = block.settings.video_ratio | default: '16:9' -%}
+        {%- assign parts = ratio | split: ':' -%}
+        {%- assign width_part = parts[0] | plus: 0 -%}
+        {%- assign height_part = parts[1] | plus: 0 -%}
+        {%- assign ratio_percent = height_part | times: 100 | divided_by: width_part -%}
+        <div class="video-container">
+          <div class="video-ratio-wrapper" style="padding-bottom: {{ ratio_percent }}%;">
+            {%- assign video_url = block.settings.video_url
+              | default: 'https://cdn.shopify.com/videos/c/vp/dd0d65a8ee0b412187e96eec6a907150/dd0d65a8ee0b412187e96eec6a907150.HD-1080p-2.5Mbps-43033818.mp4'
+            -%}
+            <video
+              aria-label="{{ block.settings.video_aria_label | escape }}"
+              {% if block.settings.autoplay %}
+                autoplay
+              {% endif %}
+              {% if block.settings.loop %}
+                loop
+              {% endif %}
+              {% if block.settings.muted %}
+                muted
+              {% endif %}
+              {% if block.settings.controls %}
+                controls
+              {% endif %}
+            >
+              <source src="{{ video_url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+    {% endcase %}
+  {% endfor %}
+</div>
 
 {% schema %}
 {
-  "name": "Video Slider",
-  "tag": "section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Video Gallery"
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text Alignment",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "range",
-      "id": "heading_size",
-      "label": "Heading Size",
-      "min": 16,
-      "max": 60,
-      "step": 2,
-      "default": 32,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "slides_to_show",
-      "label": "Videos to Show (Desktop)",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "default": 1
-    },
-    {
-      "type": "range",
-      "id": "mobile_slides_to_show",
-      "label": "Videos to Show (Mobile)",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "default": 1
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_mobile_peek",
-      "label": "Enable Mobile Peek (10% of next video)",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "slide_gap",
-      "label": "Gap Between Videos",
-      "min": 0,
-      "max": 40,
-      "step": 5,
-      "default": 20,
-      "unit": "px"
-    },
-    {
-      "type": "select",
-      "id": "aspect_ratio",
-      "label": "Video Aspect Ratio",
-      "options": [
-        { "value": "16:9", "label": "16:9" },
-        { "value": "4:3", "label": "4:3" },
-        { "value": "1:1", "label": "1:1 (Square)" },
-        { "value": "9:16", "label": "9:16 (Vertical)" }
-      ],
-      "default": "16:9"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "checkbox",
-      "id": "slider_autoplay",
-      "label": "Slider Autoplay",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "slider_autoplay_speed",
-      "label": "Slider Autoplay Speed (sec)",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "default": 5,
-      "unit": "sec"
-    },
-  
-  {
-      "type": "header",
-      "content": "Section Padding"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding Top (px)",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding Bottom (px)",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 36
-    }
-  ],
+  "name": "Custom Flex Section",
+  "settings": [],
   "blocks": [
     {
-      "type": "video",
-      "name": "Video",
+      "type": "content",
+      "name": "Content Block",
       "settings": [
+        { "type": "text", "id": "heading", "label": "Heading 1" },
+        { "type": "richtext", "id": "paragraph", "label": "Paragraph 1" },
+        { "type": "text", "id": "heading_2", "label": "Heading 2" },
+        { "type": "richtext", "id": "paragraph_2", "label": "Paragraph 2" },
+        { "type": "text", "id": "heading_3", "label": "Heading 3" },
+        { "type": "richtext", "id": "paragraph_3", "label": "Paragraph 3" }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image Block",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt_text", "label": "Image Alt Text" }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video Block",
+      "settings": [
+        { "type": "url", "id": "video_url", "label": "Video URL" },
+        { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
+        { "type": "checkbox", "id": "loop", "label": "Loop", "default": false },
+        { "type": "checkbox", "id": "muted", "label": "Muted", "default": false },
+        { "type": "checkbox", "id": "controls", "label": "Show Controls", "default": true },
         {
-          "type": "video",
-          "id": "video_file",
-          "label": "Shopify-hosted video"
+          "type": "select",
+          "id": "video_ratio",
+          "label": "Video Ratio",
+          "options": [
+            { "value": "16:9", "label": "16:9" },
+            { "value": "4:3", "label": "4:3" },
+            { "value": "1:1", "label": "1:1" },
+            { "value": "21:9", "label": "21:9" }
+          ],
+          "default": "16:9"
         },
-        {
-          "type": "image_picker",
-          "id": "thumbnail",
-          "label": "Thumbnail Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title"
-        },
-        {
-          "type": "checkbox",
-          "id": "video_autoplay",
-          "label": "Autoplay",
-          "default": false
-        },
-        {
-          "type": "checkbox",
-          "id": "video_mute",
-          "label": "Mute",
-          "default": false
-        },
-        {
-          "type": "checkbox",
-          "id": "video_controls",
-          "label": "Show Controls",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "video_loop",
-          "label": "Loop Video",
-          "default": false
-        }
+        { "type": "text", "id": "video_aria_label", "label": "Video ARIA Label" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Video Slider",
-      "blocks": [
-        { "type": "video" },
-        { "type": "video" }
-      ]
+      "name": "Custom Flex Section",
+      "category": "Custom"
     }
   ]
 }
