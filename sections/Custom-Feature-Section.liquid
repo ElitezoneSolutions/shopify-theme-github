@@ -9,6 +9,16 @@
 {% endcomment %}
 
 <style>
+  /* Color Scheme Overrides */
+  .scheme--light {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  .scheme--dark {
+    background-color: #333;
+    color: #fff;
+  }
+
   /* Base Styles */
   body {
       font-family: 'inter', sans-serif;
@@ -23,7 +33,7 @@
       gap: 20px;
       max-width: 1200px;
       margin: auto;
-      background-color: #f0f0f0;
+      /* Removed fixed background-color; now using scheme classes */
   }
   .feature-content {
       display: flex;
@@ -80,7 +90,6 @@
   .video-block.ratio-2-1 video {
       aspect-ratio: 2 / 1;
   }
-  /* For the 2.39:1 ratio, note the dot is escaped in the CSS selector */
   .video-block.ratio-2\.39-1 video {
       aspect-ratio: 2.39 / 1;
   }
@@ -98,7 +107,7 @@
   }
 </style>
 
-<div class="container {{ section.settings.color_scheme }}">
+<div class="container scheme--{{ section.settings.color_scheme }}">
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'content' %}
